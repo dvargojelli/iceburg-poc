@@ -53,7 +53,6 @@ public class IcebergJavaApiUpsert extends Setup {
 
     public IcebergJavaApiUpsert() throws Exception {
         super();
-
         GenericRecord record = GenericRecord.create(SparkSchemaUtil.convert(getSampleDf().schema()));
         sampleIcebergrecords.add(record.copy("age", 29L, "name", "JavaAPI User-a"));
         sampleIcebergrecords.add(record.copy("age", 43L, "name", "JavaAPI User-b"));
