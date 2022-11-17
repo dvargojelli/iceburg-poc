@@ -34,8 +34,8 @@ public class Minio {
     static final String DEFAULT_STORAGE_DIRECTORY = "/data";
     static final String HEALTH_ENDPOINT = "/minio/health/ready";
     static final String TEST_BUCKET = "testbucket";
-    static final String MINIO_ACCESS_KEY = "minio";
-    static final String MINIO_SECRET_KEY = "minio123";
+    public static final String MINIO_ACCESS_KEY = "minio";
+    public static final String MINIO_SECRET_KEY = "minio123";
     public GenericContainer<?> container;
     public MinioClient client;
 

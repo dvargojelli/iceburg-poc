@@ -1,14 +1,17 @@
 package com.dv.ice.examples;
 
 import com.dv.ice.IcebergException;
+import com.dv.ice.Minio;
 import com.dv.ice.Setup;
 import org.apache.iceberg.CatalogProperties;
 import org.apache.iceberg.PartitionSpec;
 import org.apache.iceberg.Schema;
 import org.apache.iceberg.Table;
 import org.apache.iceberg.aws.glue.GlueCatalog;
+import org.apache.iceberg.aws.s3.S3FileIO;
 import org.apache.iceberg.catalog.Catalog;
 import org.apache.iceberg.catalog.TableIdentifier;
+import org.apache.iceberg.jdbc.JdbcCatalog;
 import org.apache.iceberg.types.Types;
 
 import java.util.Map;
@@ -51,13 +54,17 @@ public class Sandbox extends Setup {
 
     private Map<String, String> createConfig() {
         return Map.of(
-                CatalogProperties.CATALOG_IMPL, GlueCatalog.class.getName(),
-                CatalogProperties.WAREHOUSE_LOCATION, Setup.WAREHOUSE_PATH
-        );
+                CatalogProperties.CATALOG_IMPL, JdbcCatalog.class.getName(),
+                CatalogProperties.WAREHOUSE_LOCATION, "s3://iceberg-test-dan/bookings.db/",
+                CatalogProperties.URI, "jdbc:postgresql://localhost:5432/sandbox",
+                JdbcCatalog.PROPERTY_PREFIX + "user", "postgres",
+                JdbcCatalog.PROPERTY_PREFIX + "password", "Gizmo1987))",
+                CatalogProperties.FILE_IO_IMPL, S3FileIO.class.getName());
+
     }
 
     private Catalog createCatalog(String inputName, Map<String, String> conf) {
-        Catalog newCatalog = new org.apache.iceberg.aws.glue.GlueCatalog();
+        Catalog newCatalog = new JdbcCatalog();
         newCatalog.initialize(inputName, conf);
         return newCatalog;
     }
@@ -75,4 +82,6 @@ public class Sandbox extends Setup {
                 .build();
         tableIdentifier = TableIdentifier.parse("bookings.rome_hotels");
     }
+
+
 }

@@ -50,7 +50,7 @@ public abstract class Setup {
 
 
 
-    private void setupSparkConfig() {
+    protected void setupSparkConfig() {
         sparkconf.setAppName("CDC-S3-Batch-Spark-Sink")
                 .setMaster("local[2]")
                 .set("spark.ui.enabled", "false")
@@ -71,7 +71,7 @@ public abstract class Setup {
         ;
     }
 
-    private void setupSpark() {
+    protected void setupSpark() {
         spark = SparkSession
                 .builder()
                 .config(this.sparkconf)
@@ -79,13 +79,13 @@ public abstract class Setup {
 
     }
 
-    private void setupIceberg() {
+    protected void setupIceberg() {
         icebergOptions.put("warehouse", WAREHOUSE_PATH);
         icebergOptions.put("type", "hadoop");
         icebergOptions.put("catalog-impl", "org.apache.iceberg.hadoop.HadoopCatalog");
     }
 
-    private void startMinio() throws IcebergException {
+    protected void startMinio() throws IcebergException {
         try{
             s3.start();
         }
@@ -102,7 +102,7 @@ public abstract class Setup {
         }
     }
 
-    private void createSampleDataSet() {
+    protected void createSampleDataSet() {
 
         log.warn(spark.sparkContext().getConf().toDebugString());
 
