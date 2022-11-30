@@ -1,9 +1,5 @@
 package com.jelli.iceberg.model.dao;
 
-import com.jelli.dataservicereader.components.audience.domain.AudienceStatRequestTerm;
-import com.jelli.dataservicereader.components.databook.AudienceDataRow;
-import com.jelli.dataservicereader.components.databook.DatabookRequest;
-import com.jelli.iceberg.model.tables.impl.SimpleAudienceDataTable;
 import com.jelli.iceberg.service.delegates.IcebergQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -36,7 +32,4 @@ public class SimpleAudienceDataDao {
         return cume;
     }
 
-    public Collection<AudienceDataRow> getCumeFor(Collection<AudienceStatRequestTerm> requestTerms, DatabookRequest databookRequest) {
-        return null;
-    }
 }

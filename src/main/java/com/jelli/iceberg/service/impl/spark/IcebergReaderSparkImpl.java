@@ -27,6 +27,6 @@ public class IcebergReaderSparkImpl implements IcebergReader<Dataset<Row>> {
         return getSparkSession()
                 .read()
                 .schema(SparkSchemaUtil.convert(schema))
-                .csv(csvFilePath);
+                .parquet(csvFilePath);
     }
 }
