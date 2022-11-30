@@ -1,0 +1,6 @@
+dsr.iceberg:
+  warehouseLocation: "s3://clean-warehouse/warehouse/"
+  catalogName: "DansTestCatalog2"
+  databaseUser: "postgres"
+  databasePassword: "Gizmo1987))"
+  jdbcUrl: "jdbc:postgresql://localhost:5432/sandbox"
